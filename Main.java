@@ -1,6 +1,7 @@
 
 import java.util.Scanner;
 public class Main {
+
     public static void main(String[] args) {
         int a=0; //первое число
         int b=0;//2е число
@@ -10,6 +11,7 @@ public class Main {
         int r;///
         int r1=0;//римскость числа 1
         int r2=0;//римскость числа 2
+        int Ex=0;//коэффициент ошибочности
         String[] roman = {"VIII", "III", "VII", "IV", "VI", "IX", "X", "II", "I", "V"};
         //такая последовательность, чтоб при проверке не было ошибок типа III не считалось за I.
         String[] roman1 = {"8", "3", "7", "4", "6", "9", "10", "2", "1", "5"};
@@ -36,8 +38,8 @@ public class Main {
 
 
             for (int i=0; i<roman.length; i++){
-                int cr = arr[0].indexOf(roman[i]);
-                if(cr>-1){
+
+                if(roman[i].equals(arr[0])){
                     a=Integer.parseInt(roman1[i]);
                     r1=1;
                     break;
@@ -52,8 +54,8 @@ public class Main {
                 }
             }
             for (int i=0; i<roman.length; i++){
-                int cr = arr[1].indexOf(roman[i]);
-                if(cr>-1){
+
+                if(roman[i].equals(arr[1])){
                     b=Integer.parseInt(roman1[i]);
                     r2=1;
                     break;
@@ -85,12 +87,12 @@ public class Main {
                             System.out.println(a/b);
                         }
                         else {
-                            System.out.printf("Fatal error ");
+                            Ex+=1;
                         }
 
                     }
                     else {
-                        System.out.printf("Fatal error ");
+                        Ex+=1;
                     }
                 }
                 if(r1==1){
@@ -112,18 +114,22 @@ public class Main {
                             System.out.println(roman3[x]);
                         }
                         else {
-                            System.out.printf("Fatal error ");
+                            Ex+=1;
                         }
 
                     }
                     else {
-                        System.out.printf("Fatal error ");
+                        Ex+=1;
                     }
                 }
 
             }
             else {
-                System.out.printf("Fatal error ");
+                Ex+=1;
+            }
+            if(Ex>0){
+                String test = null;
+                test.toString();
             }
         }
     }
