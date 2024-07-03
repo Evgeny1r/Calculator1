@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +19,14 @@ public class Main {
         String answer;
         int p, m, u, r;//+-*/
 
-        String e = calc().replaceAll("", "");
+        String e1 = calc();
+        String[] arr1 = e1.split("\"");
+try {
+    String dd = arr1[2];
+} catch (Exception e) {
+    throw new Exception("fatal error");
+}
+        String e = arr1[2];
         p = e.indexOf("+");
         m = e.indexOf("-");
         u = e.indexOf("*");
@@ -29,33 +37,44 @@ public class Main {
         int countr = e.length() - e.replace(String.valueOf("/"), "").length();
         int count=countp+countm+countu+countr;
 
-        String[] arr = e.split("[+\\-*/]");
-        String s1 = arr[0];
-        String s2 = arr[1];
-
         if(count!=1){
             throw new Exception("fatal error");
         }
         try{
-            a=Integer.parseInt(arr[0]);
+            a=Integer.parseInt(arr1[0]);
         }
         catch (NumberFormatException ex) {
 
         }
+        String[] q= e.split("[+\\-*/]");
+
+
         try{
-            b=Integer.parseInt(arr[1]);
+            b=Integer.parseInt(q[1]);
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+
         }
         catch (NumberFormatException ex) {
 
         }
-        String s11 = s1. replaceAll("^\"|\"$", "");
-        String s21 = s2. replaceAll("^\"|\"$", "");
-        if((a!=0)||((countu==1)||(countr==1))&&(b==0)||((countp==1)||(countm==1))&&(b!=0)||(s11.length()>10)||(s21.length()>10)){
+
+        String s11 = arr1[1];
+        String s21=arr1[0];
+        if(b==0){
+            if (arr1.length>3){
+                s21 = arr1[3];
+            }
+            else {
+                throw new Exception("fatal error");
+            }
+        }
+
+
+        if((a!=0)||((countu==1)||(countr==1))&&(b==0)||((countp==1)||(countm==1))&&(b!=0)||(s11.length()>10)||(s21.length()>10)||(b>10)){
             throw new Exception("fatal error");
         }
-        if((s1.length()-s11.length()!=2)||((countu==1)||(countr==1))&&((s2.length()-s21.length()==2))||((countp==1)||(countm==1))&&(s2.length()-s21.length()!=2)||(b>10)){
-            throw new Exception("fatal error");
-        }
+
         if(countp>0){
             System.out.println("\""+s11+s21+"\"");
         }
@@ -64,13 +83,15 @@ public class Main {
             if(d>-1){
                 char[] chars = s11.toCharArray();
                 int i=0;
+
                 System.out.print("\"");
                 for (char c : chars) {
-                    System.out.print(c);
-                    i++;
-                    if(i==d){
+
+                    if(i>=d){
                         break;
                     }
+                    System.out.print(c);
+                    i++;
                 }
                 System.out.print("\"");
             }
